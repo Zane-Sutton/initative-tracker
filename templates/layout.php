@@ -17,6 +17,7 @@ use function App\pull_flash;
     <header>
         <h1><a href="/">D&amp;D Initiative Tracker</a></h1>
         <nav>
+            <a href="/encounters">Encounters</a>
             <a href="/characters">Characters</a>
             <a href="/monsters">Monsters</a>
             <a href="/import">Import</a>

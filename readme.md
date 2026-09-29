@@ -44,6 +44,30 @@ come from one stat block.
 | GET | `/characters/{id}/edit`, `/monsters/{id}/edit` | Edit form |
 | POST | `/characters/{id}`, `/monsters/{id}` | Update |
 | POST | `/characters/{id}/delete`, `/monsters/{id}/delete` | Delete |
+| GET | `/encounters` | List encounters |
+| GET | `/encounters/new` | New encounter form |
+| POST | `/encounters` | Create encounter |
+| GET | `/encounters/{id}` | Live encounter initiative tracker |
+| GET | `/encounters/{id}/edit` | Edit encounter form |
+| POST | `/encounters/{id}` | Update encounter |
+| POST | `/encounters/{id}/delete` | Delete encounter |
+| POST | `/encounters/{id}/start` | Start combat (Round 1) |
+| POST | `/encounters/{id}/next` | Advance turn & round |
+| POST | `/encounters/{id}/prev` | Previous turn |
+| POST | `/encounters/{id}/reset` | Reset combat to planned |
+| POST | `/encounters/{id}/finish` | Mark encounter finished |
+| POST | `/encounters/{id}/roll-initiative` | Roll initiatives for encounter |
+| POST | `/encounters/{id}/sort` | Sort turn order by initiative rules |
+| POST | `/encounters/{id}/participants/character` | Add player character snapshot |
+| POST | `/encounters/{id}/participants/monster` | Add monster snapshot(s) |
+| POST | `/encounters/{id}/participants/custom` | Add custom combatant |
+| POST | `/encounters/{id}/participants/{pId}` | Inline update combatant snapshot |
+| POST | `/encounters/{id}/participants/{pId}/hp` | Quick damage / heal / temp HP |
+| POST | `/encounters/{id}/participants/{pId}/roll-initiative` | Roll individual initiative |
+| POST | `/encounters/{id}/participants/{pId}/condition` | Toggle status condition |
+| POST | `/encounters/{id}/participants/{pId}/toggle-active` | Toggle active status |
+| POST | `/encounters/{id}/participants/{pId}/delete` | Remove combatant |
+| GET/POST | `/api/dice` | Live dice roller API |
 
 All POST routes require the session CSRF token (`csrf_field()` in forms).
 

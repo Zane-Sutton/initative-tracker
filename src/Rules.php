@@ -20,6 +20,35 @@ final class Rules
         'initiative_bonus' => 0,
     ];
 
+    public const ENCOUNTER_DEFAULTS = [
+        'name' => '',
+        'notes' => '',
+        'status' => 'planned',
+        'current_round' => 0,
+    ];
+
+    /** @param array<string,mixed> $input */
+    public static function encounter(array $input): Validator
+    {
+        return (new Validator($input))
+            ->string('name', 'Name', 150, required: true)
+            ->string('notes', 'Notes', 65535);
+    }
+
+    /** @param array<string,mixed> $input */
+    public static function customParticipant(array $input): Validator
+    {
+        return (new Validator($input))
+            ->string('display_name', 'Name', 100, required: true)
+            ->int('armor_class', 'Armor class', 0, 40)
+            ->int('max_hp', 'Max HP', 1, 9999)
+            ->int('current_hp', 'Current HP', 0, 9999, required: false)
+            ->int('temp_hp', 'Temp HP', 0, 9999, required: false)
+            ->int('initiative_bonus', 'Initiative bonus', -20, 30)
+            ->int('initiative', 'Initiative', -20, 100, required: false)
+            ->string('notes', 'Notes', 65535);
+    }
+
     /** @param array<string,mixed> $input */
     public static function character(array $input): Validator
     {

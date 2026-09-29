@@ -10,7 +10,7 @@ use function App\e;
     <p>Database connection OK.</p>
     <ul>
         <?php foreach ($counts as $table => $count): ?>
-            <li><?= e(ucfirst($table)) ?>: <?= e($count) ?></li>
+            <li><a href="/<?= e($table) ?>"><strong><?= e(ucfirst($table)) ?>:</strong> <?= e($count) ?></a></li>
         <?php endforeach; ?>
     </ul>
 <?php else: ?>
