@@ -22,6 +22,12 @@ function signed(mixed $number): string
     return ($n >= 0 ? '+' : '') . $n;
 }
 
+/** Standard 5e ability modifier for a given ability score: 10-11 => 0, 12-13 => 1, 8-9 => -1, etc. */
+function ability_modifier(mixed $score): int
+{
+    return (int) floor(((int) $score - 10) / 2);
+}
+
 /** Redirect to a local path and stop. */
 function redirect(string $path): never
 {

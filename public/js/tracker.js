@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return res.json();
     }
 
+    /** Escape a string for safe insertion as HTML text content. */
+    function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
     /** Flash feedback helper */
     function flashElement(el, type = 'success') {
         if (!el) return;
@@ -260,15 +267,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const diceInput = document.getElementById('quick-dice-input');
     const diceOutput = document.getElementById('dice-result-display');
 
-    const rollExpression = async (expr) => {
+    const rollExpression = async (expr, label = null) => {
         if (!expr) return;
+        if (diceInput) diceInput.value = expr;
         if (diceOutput) diceOutput.textContent = 'Rolling...';
         try {
             const res = await fetch(`/api/dice?dice=${encodeURIComponent(expr)}`);
             const data = await res.json();
             if (data.success && data.result) {
                 if (diceOutput) {
-                    diceOutput.innerHTML = `<strong>${data.result.total}</strong> <span class="breakdown">(${data.result.breakdown})</span>`;
+                    const labelHtml = label ? ` <span class="roll-label">${escapeHtml(label)}</span>` : '';
+                    diceOutput.innerHTML = `<strong>${data.result.total}</strong> <span class="breakdown">(${data.result.breakdown})</span>${labelHtml}`;
                     flashElement(diceOutput, 'success');
                 }
             } else {
@@ -279,6 +288,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Expose globally so the statblock side panel (loaded in an iframe) can trigger rolls in this window.
+    window.trackerRollExpression = rollExpression;
+
     diceForm?.addEventListener('submit', (e) => {
         e.preventDefault();
         rollExpression(diceInput?.value || '1d20');
@@ -287,7 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.btn-quick-die').forEach((dieBtn) => {
         dieBtn.addEventListener('click', () => {
             const expr = dieBtn.getAttribute('data-die');
-            if (diceInput) diceInput.value = expr;
             rollExpression(expr);
         });
     });
@@ -303,4 +314,37 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(tabTarget)?.classList.add('active');
         });
     });
+
+    // 8. Statblock Side Panel (opens monster stat blocks in a side panel that shifts the page content over,
+    //    instead of a new tab or a darkening overlay; only the close button dismisses it).
+    const statblockPanel = document.getElementById('statblock-panel');
+    const statblockFrame = document.getElementById('statblock-panel-frame');
+    const statblockOpenTab = document.getElementById('statblock-panel-open-tab');
+    const statblockClose = document.getElementById('statblock-panel-close');
+
+    const openStatblockPanel = (url) => {
+        if (!statblockPanel || !statblockFrame) return;
+        statblockFrame.src = url;
+        if (statblockOpenTab) statblockOpenTab.href = url;
+        statblockPanel.classList.add('open');
+        document.body.classList.add('statblock-panel-active');
+        statblockPanel.setAttribute('aria-hidden', 'false');
+    };
+
+    const closeStatblockPanel = () => {
+        if (!statblockPanel) return;
+        statblockPanel.classList.remove('open');
+        document.body.classList.remove('statblock-panel-active');
+        statblockPanel.setAttribute('aria-hidden', 'true');
+        if (statblockFrame) statblockFrame.src = 'about:blank';
+    };
+
+    document.querySelectorAll('.statblock-link').forEach((link) => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            openStatblockPanel(link.getAttribute('href'));
+        });
+    });
+
+    statblockClose?.addEventListener('click', closeStatblockPanel);
 });

@@ -164,7 +164,7 @@ $currentRound = (int)$encounter['current_round'];
                                 <?= e($p['character_class'] ?? '') ?>
                             <?php elseif (!empty($p['monster_id'])): ?>
                                 <span class="badge-type badge-monster">Monster</span>
-                                <a href="/monsters/<?= e($p['monster_id']) ?>" target="_blank" class="statblock-link">CR <?= e($p['monster_cr'] ?? '?') ?> stat block ↗</a>
+                                <a href="/monsters/<?= e($p['monster_id']) ?>" class="statblock-link" data-monster-id="<?= e($p['monster_id']) ?>">CR <?= e($p['monster_cr'] ?? '?') ?> stat block ↗</a>
                             <?php else: ?>
                                 <span class="badge-type badge-custom">Custom</span>
                             <?php endif; ?>
@@ -344,6 +344,20 @@ $currentRound = (int)$encounter['current_round'];
                 <button type="submit" class="button">Add Custom Combatant</button>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Statblock Side Panel -->
+<div id="statblock-panel" class="statblock-side-panel" aria-hidden="true">
+    <div class="statblock-panel-header">
+        <span>Monster Stat Block</span>
+        <div>
+            <a id="statblock-panel-open-tab" href="#" target="_blank" class="statblock-panel-newtab" title="Open in new tab">↗</a>
+            <button type="button" id="statblock-panel-close" class="statblock-panel-close" title="Close">&times;</button>
+        </div>
+    </div>
+    <div class="statblock-panel-body">
+        <iframe id="statblock-panel-frame" src="about:blank" title="Monster Stat Block"></iframe>
     </div>
 </div>
 
