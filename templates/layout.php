@@ -19,6 +19,7 @@ use function App\pull_flash;
         <nav>
             <a href="/characters">Characters</a>
             <a href="/monsters">Monsters</a>
+            <a href="/import">Import</a>
         </nav>
     </header>
     <main>

@@ -49,3 +49,10 @@ textarea { resize: vertical; }
 .statblock dt { font-weight: 700; }
 .statblock dd { margin: 0; }
 pre { background: #eee; padding: 1rem; overflow-x: auto; border-radius: 4px; }
+
+input[type=checkbox], input[type=file] { width: auto; }
+.field.checkbox { flex-direction: row; align-items: flex-start; gap: 0.5rem; }
+.field.checkbox label { font-weight: normal; margin: 0; }
+details { margin-top: 1.5rem; background: #fff; padding: 0.75rem 1rem; border-radius: 6px; }
+summary { cursor: pointer; font-weight: 600; }
+.flash ul { margin: 0.5rem 0 0 1.25rem; padding: 0; }

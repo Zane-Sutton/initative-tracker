@@ -46,3 +46,16 @@ come from one stat block.
 | POST | `/characters/{id}/delete`, `/monsters/{id}/delete` | Delete |
 
 All POST routes require the session CSRF token (`csrf_field()` in forms).
+
+## JSON import
+
+Open `/import` (nav: Import) to paste JSON or upload a `.json` file. The format is
+`{ "characters": [...], "monsters": [...] }`; see the "Format reference" on that page.
+`samples/import-sample.json` contains a five-character party and some SRD undead/goblins,
+and the **Load sample** button fills the box with it.
+
+- Validation uses the same rules as the forms (`src/Rules.php`).
+- All-or-nothing: if any entry is invalid, nothing is written and every error is listed.
+- Entries are matched by name. Existing matches are skipped, or overwritten if
+  "Update existing" is ticked (an update replaces all editable fields).
+- In monsters, `stats` may be a JSON object and `actions` may be a list of strings.

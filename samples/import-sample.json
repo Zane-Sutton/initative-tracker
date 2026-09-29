@@ -1,0 +1,187 @@
+{
+  "characters": [
+    {
+      "name": "Fannybaws",
+      "class": "Barbarian",
+      "level": 5,
+      "armor_class": 15,
+      "max_hp": 55,
+      "initiative_bonus": 2,
+      "passive_perception": 11,
+      "notes": "Unarmored Defense. Rage 3/day."
+    },
+    {
+      "name": "Tiplo",
+      "class": "Artificer (Alchemist)",
+      "level": 5,
+      "armor_class": 16,
+      "max_hp": 38,
+      "initiative_bonus": 2,
+      "passive_perception": 12,
+      "notes": "Alchemist's supplies. Experimental elixirs."
+    },
+    {
+      "name": "Haldin",
+      "class": "Cleric",
+      "level": 5,
+      "armor_class": 18,
+      "max_hp": 38,
+      "initiative_bonus": 0,
+      "passive_perception": 13,
+      "notes": "Heavy armor and shield."
+    },
+    {
+      "name": "Guldor",
+      "class": "Paladin",
+      "level": 5,
+      "armor_class": 18,
+      "max_hp": 44,
+      "initiative_bonus": 0,
+      "passive_perception": 11,
+      "notes": "Lay on Hands pool: 25 HP."
+    },
+    {
+      "name": "Damo",
+      "class": "Wizard",
+      "level": 5,
+      "armor_class": 12,
+      "max_hp": 32,
+      "initiative_bonus": 2,
+      "passive_perception": 11,
+      "notes": "Mage Armor raises AC to 15."
+    }
+  ],
+  "monsters": [
+    {
+      "name": "Zombie",
+      "size": "Medium",
+      "creature_type": "undead",
+      "challenge_rating": "1/4",
+      "armor_class": 8,
+      "hp_average": 22,
+      "hp_formula": "3d8+9",
+      "initiative_bonus": -2,
+      "speed": "20 ft.",
+      "source": "SRD 5.1",
+      "stats": {
+        "str": 13, "dex": 6, "con": 16, "int": 3, "wis": 6, "cha": 5,
+        "saves": { "wis": 0 },
+        "damage_immunities": ["poison"],
+        "condition_immunities": ["poisoned"],
+        "senses": "darkvision 60 ft., passive Perception 8",
+        "languages": "understands the languages it knew in life but can't speak",
+        "traits": [
+          "Undead Fortitude: If damage reduces the zombie to 0 hit points, it makes a Constitution save (DC 5 + the damage taken) unless the damage is radiant or from a critical hit. On a success it drops to 1 hit point instead."
+        ]
+      },
+      "actions": [
+        "Slam. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage."
+      ]
+    },
+    {
+      "name": "Ogre Zombie",
+      "size": "Large",
+      "creature_type": "undead",
+      "challenge_rating": "2",
+      "armor_class": 8,
+      "hp_average": 85,
+      "hp_formula": "9d10+36",
+      "initiative_bonus": -2,
+      "speed": "30 ft.",
+      "source": "SRD 5.1",
+      "stats": {
+        "str": 19, "dex": 6, "con": 18, "int": 3, "wis": 6, "cha": 5,
+        "saves": { "wis": 0 },
+        "damage_immunities": ["poison"],
+        "condition_immunities": ["poisoned"],
+        "senses": "darkvision 60 ft., passive Perception 8",
+        "languages": "understands Common and Giant but can't speak",
+        "traits": [
+          "Undead Fortitude: If damage reduces the ogre zombie to 0 hit points, it makes a Constitution save (DC 5 + the damage taken) unless the damage is radiant or from a critical hit. On a success it drops to 1 hit point instead."
+        ]
+      },
+      "actions": [
+        "Morningstar. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage."
+      ]
+    },
+    {
+      "name": "Skeleton",
+      "size": "Medium",
+      "creature_type": "undead",
+      "challenge_rating": "1/4",
+      "armor_class": 13,
+      "hp_average": 13,
+      "hp_formula": "2d8+4",
+      "initiative_bonus": 2,
+      "speed": "30 ft.",
+      "source": "SRD 5.1",
+      "stats": {
+        "str": 10, "dex": 14, "con": 15, "int": 6, "wis": 8, "cha": 5,
+        "armor": "armor scraps",
+        "damage_vulnerabilities": ["bludgeoning"],
+        "damage_immunities": ["poison"],
+        "condition_immunities": ["exhaustion", "poisoned"],
+        "senses": "darkvision 60 ft., passive Perception 9",
+        "languages": "understands the languages it knew in life but can't speak"
+      },
+      "actions": [
+        "Shortsword. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+        "Shortbow. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      ]
+    },
+    {
+      "name": "Goblin",
+      "size": "Small",
+      "creature_type": "humanoid (goblinoid)",
+      "challenge_rating": "1/4",
+      "armor_class": 15,
+      "hp_average": 7,
+      "hp_formula": "2d6",
+      "initiative_bonus": 2,
+      "speed": "30 ft.",
+      "source": "SRD 5.1",
+      "stats": {
+        "str": 8, "dex": 14, "con": 10, "int": 10, "wis": 8, "cha": 8,
+        "armor": "leather armor, shield",
+        "skills": { "stealth": 6 },
+        "senses": "darkvision 60 ft., passive Perception 9",
+        "languages": "Common, Goblin",
+        "traits": [
+          "Nimble Escape: The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
+        ]
+      },
+      "actions": [
+        "Scimitar. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage.",
+        "Shortbow. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      ]
+    },
+    {
+      "name": "Goblin Boss",
+      "size": "Small",
+      "creature_type": "humanoid (goblinoid)",
+      "challenge_rating": "1",
+      "armor_class": 17,
+      "hp_average": 21,
+      "hp_formula": "6d6",
+      "initiative_bonus": 2,
+      "speed": "30 ft.",
+      "source": "SRD 5.1",
+      "stats": {
+        "str": 10, "dex": 14, "con": 10, "int": 10, "wis": 8, "cha": 10,
+        "armor": "chain shirt, shield",
+        "skills": { "stealth": 6 },
+        "senses": "darkvision 60 ft., passive Perception 9",
+        "languages": "Common, Goblin",
+        "traits": [
+          "Nimble Escape: The goblin can take the Disengage or Hide action as a bonus action on each of its turns."
+        ]
+      },
+      "actions": [
+        "Multiattack. The goblin makes two attacks with its morningstar.",
+        "Morningstar. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+        "Javelin. Melee or Ranged Weapon Attack: +2 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 3 (1d6) piercing damage.",
+        "Reaction - Redirect Attack. When a creature the goblin can see targets it with an attack, the goblin chooses another goblin within 5 feet and swaps places with it; the chosen goblin becomes the target instead."
+      ]
+    }
+  ]
+}

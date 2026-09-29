@@ -6,6 +6,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 use App\Controllers\CharacterController;
 use App\Controllers\HomeController;
+use App\Controllers\ImportController;
 use App\Controllers\MonsterController;
 use App\Database;
 use App\Router;
@@ -44,6 +45,12 @@ $router->get('/monsters/{id}', [$monsters, 'show']);
 $router->get('/monsters/{id}/edit', [$monsters, 'edit']);
 $router->post('/monsters/{id}', [$monsters, 'update']);
 $router->post('/monsters/{id}/delete', [$monsters, 'destroy']);
+
+// JSON import
+$import = new ImportController();
+$router->get('/import', [$import, 'form']);
+$router->post('/import', [$import, 'run']);
+$router->get('/import/sample', [$import, 'sample']);
 
 try {
     $router->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
