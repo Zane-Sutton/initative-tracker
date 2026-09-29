@@ -1,7 +1,6 @@
 <?php
 
 use function App\csrf_field;
-use function App\csrf_token;
 use function App\e;
 use function App\signed;
 
@@ -17,7 +16,6 @@ $isFinished = ($encounter['status'] === 'finished');
 $currentTurnOrder = $encounter['current_turn_order'] !== null ? (int)$encounter['current_turn_order'] : null;
 $currentRound = (int)$encounter['current_round'];
 ?>
-<meta name="csrf-token" content="<?= e(csrf_token()) ?>">
 
 <div class="encounter-header" data-encounter-id="<?= e($encounter['id']) ?>">
     <div class="toolbar">

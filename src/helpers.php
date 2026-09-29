@@ -33,8 +33,11 @@ function redirect(string $path): never
 function abort(int $status, string $message): never
 {
     http_response_code($status);
-    View::render('error', ['status' => $status, 'message' => $message]);
-    exit;
+    if (PHP_SAPI !== 'cli') {
+        View::render('error', ['status' => $status, 'message' => $message]);
+        exit;
+    }
+    throw new \RuntimeException("Abort $status: $message");
 }
 
 function flash(string $message, string $type = 'success'): void
@@ -65,6 +68,24 @@ function csrf_field(): string
 function verify_csrf(): void
 {
     $sent = $_POST['_csrf'] ?? '';
+
+    if ($sent === '') {
+        $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+        if (str_contains($contentType, 'application/json')) {
+            $raw = file_get_contents('php://input');
+            if ($raw !== false && $raw !== '') {
+                $decoded = json_decode($raw, true);
+                if (is_array($decoded) && isset($decoded['_csrf'])) {
+                    $sent = $decoded['_csrf'];
+                }
+            }
+        }
+    }
+
+    // Also check X-CSRF-TOKEN header for common AJAX patterns
+    if ($sent === '') {
+        $sent = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
+    }
 
     if (!is_string($sent) || !hash_equals(csrf_token(), $sent)) {
         abort(419, 'Invalid or expired form token. Go back, refresh the page and try again.');
