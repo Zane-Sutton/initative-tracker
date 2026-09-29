@@ -32,3 +32,17 @@ Open http://localhost:8000. The home page shows DB connection status and row cou
 `characters` and `monsters` are templates. `encounter_participants` holds the live
 instances (rolled initiative, current/temp HP, turn order), so several goblins can
 come from one stat block.
+
+## Routes
+
+| Method | Path | Action |
+|--------|------|--------|
+| GET | `/characters`, `/monsters` | List (with `?q=` name search) |
+| GET | `/characters/new`, `/monsters/new` | New form |
+| POST | `/characters`, `/monsters` | Create |
+| GET | `/monsters/{id}` | Stat block |
+| GET | `/characters/{id}/edit`, `/monsters/{id}/edit` | Edit form |
+| POST | `/characters/{id}`, `/monsters/{id}` | Update |
+| POST | `/characters/{id}/delete`, `/monsters/{id}/delete` | Delete |
+
+All POST routes require the session CSRF token (`csrf_field()` in forms).
